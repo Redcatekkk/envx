@@ -1,0 +1,11 @@
+{
+  "descriptions": {
+    "DATABASE_URL": "Postgres connection string",
+    "PORT": "Server port",
+    "STRIPE_SECRET_KEY": "Stripe secret key (never commit real value)"
+  },
+  "required": ["DATABASE_URL"],
+  "examples": {
+    "PORT": "3000"
+  }
+}
