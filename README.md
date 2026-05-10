@@ -9,7 +9,6 @@ Prevent **env drift** in PRs (and ship with confidence).
 - generates `env.schema.json`, `env.zod.ts`, and `env.d.ts`
 - scans for common secret patterns (optionally staged-only)
 
-> Replace `yourname` in the badge URLs after you publish.
 
 [![CI](https://github.com/Redcatekkk/envx/actions/workflows/envx.yml/badge.svg)](https://github.com/yourname/envx/actions/workflows/envx.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
