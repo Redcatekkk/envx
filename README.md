@@ -24,51 +24,51 @@ Most `.env.example` generators stop at “dump some keys”. `envx` focuses on w
 ## Install
 
 ```bash
-npm i -D envx
+npm i -D @redcatekkk/envx
 ```
 
 ## Quickstart
 
 ```bash
 # Interactive menu
-npx envx ui
+npx @redcatekkk/envx ui
 
 # Generate .env.example from code usage + .env
-npx envx generate --scan
+npx @redcatekkk/envx generate --scan
 
 # Fail CI if PR introduces undocumented env keys
-npx envx gate --base origin/main
+npx @redcatekkk/envx gate --base origin/main
 
 # Generate schema/types into .envx/
-npx envx schema --scan --out-dir .envx
+npx @redcatekkk/envx schema --scan --out-dir .envx
 
 # Scan staged files for common secret patterns
-npx envx secrets --staged
+npx @redcatekkk/envx secrets --staged
 ```
 
 ## Interactive UI
 
 ```bash
-npx envx ui
+npx @redcatekkk/envx ui
 ```
 
 ## Generate `.env.example`
 
 ```bash
-npx envx generate --scan
+npx @redcatekkk/envx generate --scan
 ```
 
 Useful flags:
 
 ```bash
-npx envx generate --scan --redact-strategy placeholder
-npx envx generate --scan --keep-values PORT,NODE_ENV
+npx @redcatekkk/envx generate --scan --redact-strategy placeholder
+npx @redcatekkk/envx generate --scan --keep-values PORT,NODE_ENV
 ```
 
 ## Gate PRs (env drift / undocumented keys)
 
 ```bash
-npx envx gate --base origin/main
+npx @redcatekkk/envx gate --base origin/main
 ```
 
 This fails if your PR introduces env keys in changed files that are not documented in `.envxrc.json` (or `envx.config.json`).
@@ -76,7 +76,7 @@ This fails if your PR introduces env keys in changed files that are not document
 ## Schema + types
 
 ```bash
-npx envx schema --scan --out-dir .envx
+npx @redcatekkk/envx schema --scan --out-dir .envx
 ```
 
 Outputs:
@@ -88,8 +88,8 @@ Outputs:
 ## Secrets scan
 
 ```bash
-npx envx secrets
-npx envx secrets --staged
+npx @redcatekkk/envx secrets
+npx @redcatekkk/envx secrets --staged
 ```
 
 ## Config
@@ -112,7 +112,7 @@ Create `.envxrc.json` (or copy `.envxrc.example.json`):
 ## GitHub Action
 
 ```bash
-npx envx init-action
+npx @redcatekkk/envx init-action
 ```
 
 This writes `.github/workflows/envx.yml` that runs:

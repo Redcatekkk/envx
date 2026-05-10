@@ -1,19 +1,27 @@
 {
-  "name": "envx",
-  "version": "0.2.0",
+  "name": "@redcatekkk/envx",
+  "version": "0.3.3",
   "description": "Prevent env drift in PRs, generate env schema/types, and guard against leaked secrets.",
   "license": "MIT",
-  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Redcatekkk/envx.git"
+  },
+  "homepage": "https://github.com/Redcatekkk/envx#readme",
+  "bugs": "https://github.com/Redcatekkk/envx/issues",
   "bin": {
-    "envx": "./dist/cli.js"
+    "envx": "dist/cli.js"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "tsx src/cli.ts",
-    "build": "tsup src/cli.ts --format esm --platform node --sourcemap",
+    "build": "tsup",
     "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "chalk": "^5.4.1",
