@@ -10,7 +10,7 @@ Prevent **env drift** in PRs (and ship with confidence).
 - scans for common secret patterns (optionally staged-only)
 
 
-[![CI](https://github.com/Redcatekkk/envx/actions/workflows/envx.yml/badge.svg)](https://github.com/yourname/envx/actions/workflows/envx.yml)
+[![CI](https://github.com/Redcatekkk/envx/actions/workflows/envx.yml/badge.svg)](https://github.com/Redcatekkk/envx/actions/workflows/envx.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Why this exists
