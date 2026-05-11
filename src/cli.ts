@@ -14,6 +14,7 @@ import { runGate } from "./gate.js";
 import { secretsCheck } from "./secrets.js";
 import { writeSchemaOutputs } from "./schema.js";
 import { runUi } from "./ui.js";
+import { runDoctor } from "./doctor.js";
 
 const DEFAULT_OUT_FILE = ".env.example";
 
@@ -51,7 +52,7 @@ const program = new Command();
 program
   .name("envx")
   .description("Prevent env drift in PRs, generate env schema/types, and guard against leaked secrets")
-  .version("0.2.0")
+  .version(typeof __ENVX_VERSION__ === "string" ? __ENVX_VERSION__ : "0.0.0")
   .option("--no-banner", "Disable colorful banner output")
   .option("-C, --cwd <path>", "Working directory", process.cwd())
   .option("--config <path>", "Path to envx config (JSON)")
@@ -73,6 +74,16 @@ program
     // Execute by re-invoking the command handler via process args
     process.argv = [process.argv[0]!, process.argv[1]!, selection.command, ...selection.args, "-C", cwd];
     program.parse(process.argv);
+  });
+
+program
+  .command("doctor")
+  .description("Check your setup (node/git/config)")
+  .action(() => {
+    const rootOpts = program.opts() as { cwd: string; config?: string };
+    const cwd = path.resolve(rootOpts.cwd);
+    const code = runDoctor({ cwd, configPath: rootOpts.config });
+    process.exit(code);
   });
 
 program
@@ -277,10 +288,13 @@ program
     const dir = path.dirname(outPath);
     fs.mkdirSync(dir, { recursive: true });
 
-    const workflow = `name: envx\n\non:\n  pull_request:\n  push:\n    branches: [main]\n\njobs:\n  envx:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n      - name: Install\n        run: npm ci\n      - name: Build\n        run: npm run build\n      - name: Gate (document new env keys)\n        run: node dist/cli.js gate --base origin/main\n      - name: Check .env.example\n        run: node dist/cli.js check --scan\n      - name: Secrets (staged)\n        run: node dist/cli.js secrets --staged\n`;
+    const workflow = `name: envx\n\non:\n  pull_request:\n  push:\n    branches: [main]\n\njobs:\n  envx:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n      - name: Install\n        run: npm ci\n      - name: Build\n        run: npm run build\n      - name: Gate (document new env keys)\n        run: npx @redcatekkk/envx gate --base origin/main\n      - name: Check .env.example\n        run: npx @redcatekkk/envx check --scan\n      - name: Secrets (staged)\n        run: npx @redcatekkk/envx secrets --staged\n`;
 
     fs.writeFileSync(outPath, workflow, "utf8");
     console.log(chalk.green(`Wrote ${path.relative(cwd, outPath)}`));
+    console.log(chalk.gray("Next:"));
+    console.log(chalk.gray("- Commit the workflow file"));
+    console.log(chalk.gray("- Open a PR to see envx gate/check/secrets run"));
   });
 
 program.parse();

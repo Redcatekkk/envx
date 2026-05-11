@@ -33,6 +33,9 @@ npm i -D @redcatekkk/envx
 # Interactive menu
 npx @redcatekkk/envx ui
 
+# Check your setup (node/git/config)
+npx @redcatekkk/envx doctor
+
 # Generate .env.example from code usage + .env
 npx @redcatekkk/envx generate --scan
 

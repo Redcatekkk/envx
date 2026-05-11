@@ -13,6 +13,7 @@ export async function runUi(params: {
       name: "cmd",
       message: "What do you want to run?",
       choices: [
+        { title: "Doctor (check setup)", value: "doctor" },
         { title: "Generate .env.example", value: "generate" },
         { title: "Gate (PR env drift / documentation)", value: "gate" },
         { title: "Generate schema/types (env.schema.json / env.zod.ts / env.d.ts)", value: "schema" },
@@ -23,6 +24,10 @@ export async function runUi(params: {
   ]);
 
   if (!res.cmd) return null;
+
+  if (res.cmd === "doctor") {
+    return { command: "doctor", args: [] };
+  }
 
   if (res.cmd === "generate") {
     const opts = await prompts([

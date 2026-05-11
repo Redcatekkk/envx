@@ -1,6 +1,6 @@
 {
   "name": "@redcatekkk/envx",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Prevent env drift in PRs, generate env schema/types, and guard against leaked secrets.",
   "license": "MIT",
   "repository": {
